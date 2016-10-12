@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="jorgeromeromoli">
+
+    <title>MONGOAPI</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <link href="css/prism.css" rel="stylesheet">
+    <link href="css/prismGit.css" rel="stylesheet">
+    
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+    <script src="js/prism.js"></script>
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">MONGOAPI</a>
+            </div>
+
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                	<li class="active">
+                        <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Index</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><i class="fa fa-fw fa-file"></i> mongocrudAsync </a>
+                        <ul>
+                            <li>
+                                <a href="#">insert</a>
+                            </li>
+                            <li>
+                                <a href="#">read</a>
+                            </li>
+                            <li>
+                                <a href="#">update</a>
+                            </li>
+                            <li>
+                                <a href="#">delete</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            DELETE
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                <i class="fa fa-file"></i> mongocrudAsync \ delete
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Description</h2>
+                        To delete documents in a collection.
+                    </div>
+                        <div>
+                            <pre>
+                                <code class="language-JavaScript">
+let mongoapi = require('mongocrudAsync');
+const connection = 'mongodb://127.0.0.1:27017/local';
+
+let mongo = new mongoapi(cs);
+let parameters = { 
+    collection: 'test_crudAsync', 
+    filter: { code: 1 } 
+}
+mongo.delete(parameters).then( (result) => {
+
+    resolve(result);
+
+}, (err) => {
+
+    reject(err);
+
+} );
+                                </code>
+                            </pre>
+                        </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Parameters</h2>
+                        The delete method needs a parameter of type object with the following properties:
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                	<th>Name</th>
+                                	<th>Type</th>
+                                	<th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        collection
+                                    </td>
+                                    <td>
+                                        text
+                                    </td>
+                                    <td>
+                                    	Name of the collection
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        filter
+                                    </td>
+                                    <td>
+                                        object 
+                                    </td>
+                                    <td>
+                                        <p>
+                                    	Object which properties define the documents that will be deleted.
+                                        </p>
+                                        <p>
+                                        Optional. If delete method is executed without filter will be deleted whole collection
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div>
+                            Example of parameter with filter
+                        </div>
+                        <div>
+                            <pre>
+                            <code class="language-JavaScript">
+let parameters = { 
+    collection: 'test_crudAsync', 
+    filter: { code: 1 } 
+}
+                            </code>
+                            </pre>
+                        </div>
+                        <div>
+                            Example of parameter without filter
+                        </div>
+                        <div>
+                            <pre>
+                            <code class="language-JavaScript">
+let parameters = { 
+    collection: 'test_crudAsync' 
+}
+                            </code>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div>
+                            <h2>Response</h2>
+                            The response is handled by a promise. It return a object with the following properties:
+                            <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        status
+                                    </td>
+                                    <td>
+                                        boolean
+                                    </td>
+                                    <td>
+                                        <p><b>true</b>: if the document was inserted correctly</p>
+                                        <p><b>false</b>: if the document was not inserted correctly</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        deletedCount
+                                    </td>
+                                    <td>
+                                        number 
+                                    </td>
+                                    <td>
+                                        Amount of deleted documents
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table> 
+                        </div>
+                        <div>
+                            <pre>
+                                <code class="language-JavaScript">
+mongo.delete(params).then( (result) => {
+    console.log(result);
+});
+                                </code>
+                            </pre>
+                            <pre>
+                                <code class="languageGit-git">
+$ { status: true,
+  deletedCount: 1 }
+                                </code>
+                            </pre>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div>
+                            <h2>Errors</h2>
+                            The error will be handled by a promise. It return a object with the following properties:
+                            <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        status
+                                    </td>
+                                    <td>
+                                        boolean
+                                    </td>
+                                    <td>
+                                        The value will be <b>false</b> so means an error was found
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        code
+                                    </td>
+                                    <td>
+                                        string
+                                    </td>
+                                    <td>
+                                        <p>The value has the following format: <font color="red">err_mongodbapi_<b>xxx</b></font></p>
+                                        <p><font color="red"><b>xxx</b></font> represents an internal control number</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        message
+                                    </td>
+                                    <td>
+                                        string 
+                                    </td>
+                                    <td>
+                                        Error message created by mongodbapi
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        messageMongo
+                                    </td>
+                                    <td>
+                                        string 
+                                    </td>
+                                    <td>
+                                        Error message created by mongodb
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        trace
+                                    </td>
+                                    <td>
+                                        string 
+                                    </td>
+                                    <td>
+                                        Trace error
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table> 
+                        </div>
+                        <div>
+                            <pre>
+                                <code class="language-JavaScript">
+let mongoapi = require('mongocrudAsync');
+const connection = 'mongodb://bad connection';
+
+let mongo = new mongoapi(connection);
+let params = { 
+    collection: 'test_crudAsync', 
+    document: {'id': 1, 'name': 'test1'} 
+}
+mongo.insert(params).then( (result) => {
+
+    console.log(result);
+
+}, (err) => {
+
+    console.log(err);
+
+} );
+                                </code>
+                            </pre>
+                            <pre>
+                                <code class="languageGit-git">
+$ { [Error: Database connection failed]
+  status: false,
+  code: 'err_mongodbapi_000',
+  message: 'Database connection failed',
+  messageMongo: [Error: invalid port (larger than 65535) with hostname],
+  trace: 'Error: Database connection failed\n    at err_mongodbapi_000 (C:\\projects\\node\\mongodbapi\\lib\\basecrud.js:243:12)\n    at C:\\projects\\node\\mongodbapi\\lib\\basecrud.js:122:15\n    at runMicrotasksCallback (node.js:327:7)\n    at nextTickCallbackWith0Args (node.js:420:9)\n    at process._tickCallback (node.js:349:13)' }
+                                </code>
+                            </pre>
+                        </div>
+                        <div>
+                            <p></p>
+                            The insert method can return the following errors:
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Message</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <font color="red">err_mongodbapi_000</font>
+                                        </td>
+                                        <td>
+                                            Database connection failed
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <font color="red">err_mongodbapi_004</font>
+                                        </td>
+                                        <td>
+                                            Command object was not created correctly: collection and document are mandatory field
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <font color="red">err_mongodbapi_006</font>
+                                        </td>
+                                        <td>
+                                            There was a error executing the delete command
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Related links</h2>
+                        <ul>
+                            <li>
+                                <a href="https://docs.mongodb.com/manual/tutorial/remove-documents/" target="black">MongoDb manual: delete</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row"><div class="col-lg-12"><p></p></div></div>
+                <div class="row"><div class="col-lg-12"><p></p></div></div>
+                <div class="row"><div class="col-lg-12"><p></p></div></div>
+                <div class="row"><div class="col-lg-12"><p></p></div></div>
+                <div class="row"><div class="col-lg-12"><p></p></div></div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/prism.js"></script>
+
+</body>
+
+</html>
