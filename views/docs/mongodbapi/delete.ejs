@@ -3,24 +3,9 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="jorgeromeromoli">
+    <% include partials/metas %>
 
-    <title>MONGOAPI</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="/css/docs/mongodbapi/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="/css/docs/mongodbapi/sb-admin.css" rel="stylesheet">
-    <link href="/css/docs/mongodbapi/prism.css" rel="stylesheet">
-    <link href="/css/docs/mongodbapi/prismGit.css" rel="stylesheet">
-    
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <% include partials/themes %>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,45 +20,7 @@
     
     <div id="wrapper">
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-color:#37357C">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">MONGOAPI</a>
-            </div>
-
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                	<li class="active">
-                        <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Index</a>
-                    </li>
-                    <li>
-                        <a href="javascript:;"><i class="fa fa-fw fa-file"></i> mongocrudAsync </a>
-                        <ul>
-                            <li>
-                                <a href="#">insert</a>
-                            </li>
-                            <li>
-                                <a href="#">read</a>
-                            </li>
-                            <li>
-                                <a href="#">update</a>
-                            </li>
-                            <li>
-                                <a href="#">delete</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </nav>
+        <% include partials/navigation %>
 
         <div id="page-wrapper">
 
@@ -87,7 +34,7 @@
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-file"></i> mongocrudAsync \ delete
+                                <i class="fa fa-file"></i> MONGODBAPI \ delete
                             </li>
                         </ol>
                     </div>
@@ -97,19 +44,20 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h2>Description</h2>
-                        To delete documents in a collection.
+                        To delete documents in a collection. The following example delete the document which code is equal to 1 in the collection 'test':
                     </div>
                         <div>
                             <pre>
                                 <code class="language-JavaScript">
-let mongoapi = require('mongocrudAsync');
-const connection = 'mongodb://127.0.0.1:27017/local';
+let mongoapi = require('mongodbapi');
 
+const connection = 'mongodb://127.0.0.1:27017/local';
 let mongo = new mongoapi(cs);
 let parameters = { 
-    collection: 'test_crudAsync', 
+    collection: 'test', 
     filter: { code: 1 } 
-}
+};
+
 mongo.delete(parameters).then( (result) => {
 
     resolve(result);
@@ -127,7 +75,7 @@ mongo.delete(parameters).then( (result) => {
                 <div class="row">
                     <div class="col-lg-12">
                         <h2>Parameters</h2>
-                        The delete method needs a parameter of type object with the following properties:
+                        The <b>delete</b> method require a parameter of type object with the following properties:
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -157,37 +105,40 @@ mongo.delete(parameters).then( (result) => {
                                     </td>
                                     <td>
                                         <p>
+                                        <b>[optional]</b>
+                                        </p>
+                                        <p>
                                     	Object which properties define the documents that will be deleted.
                                         </p>
                                         <p>
-                                        Optional. If delete method is executed without filter will be deleted whole collection
+                                        If delete method is executed without filter will be deleted whole collection
                                         </p>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         <div>
-                            Example of parameter with filter
+                            Example of parameter with filter:
                         </div>
                         <div>
                             <pre>
                             <code class="language-JavaScript">
 let parameters = { 
-    collection: 'test_crudAsync', 
+    collection: 'test', 
     filter: { code: 1 } 
-}
+};
                             </code>
                             </pre>
                         </div>
                         <div>
-                            Example of parameter without filter
+                            Example of parameter without filter:
                         </div>
                         <div>
                             <pre>
                             <code class="language-JavaScript">
 let parameters = { 
-    collection: 'test_crudAsync' 
-}
+    collection: 'test' 
+};
                             </code>
                             </pre>
                         </div>
@@ -198,7 +149,7 @@ let parameters = {
                     <div class="col-lg-12">
                         <div>
                             <h2>Response</h2>
-                            The response is handled by a promise. It return a object with the following properties:
+                            The method returns a object with the following properties:
                             <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -216,8 +167,7 @@ let parameters = {
                                         boolean
                                     </td>
                                     <td>
-                                        <p><b>true</b>: if the document was inserted correctly</p>
-                                        <p><b>false</b>: if the document was not inserted correctly</p>
+                                        The value will be true, so means no errors was found during the execution
                                     </td>
                                 </tr>
                                 <tr>
@@ -257,7 +207,7 @@ $ { status: true,
                     <div class="col-lg-12">
                         <div>
                             <h2>Errors</h2>
-                            The error will be handled by a promise. It return a object with the following properties:
+                            The method can returns a error object with the following properties:
                             <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -309,7 +259,7 @@ $ { status: true,
                                         string 
                                     </td>
                                     <td>
-                                        Error message created by mongodb
+                                        Error message created from mongodb
                                     </td>
                                 </tr>
                                 <tr>
@@ -329,15 +279,16 @@ $ { status: true,
                         <div>
                             <pre>
                                 <code class="language-JavaScript">
-let mongoapi = require('mongocrudAsync');
-const connection = 'mongodb://bad connection';
+let mongoapi = require('mongodbapi');
 
+const connection = 'mongodb://bad connection';
 let mongo = new mongoapi(connection);
 let params = { 
-    collection: 'test_crudAsync', 
-    document: {'id': 1, 'name': 'test1'} 
-}
-mongo.insert(params).then( (result) => {
+    collection: 'test', 
+    filter: {'code': 1} 
+};
+
+mongo.delete(params).then( (result) => {
 
     console.log(result);
 
@@ -361,7 +312,7 @@ $ { [Error: Database connection failed]
                         </div>
                         <div>
                             <p></p>
-                            The insert method can return the following errors:
+                            The <b>delete</b> method can return the following errors:
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -426,13 +377,7 @@ $ { [Error: Database connection failed]
     </div>
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="/js/docs/mongodbapi/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/js/docs/mongodbapi/bootstrap.min.js"></script>
-
-    <script src="/js/docs/mongodbapi/prism.js"></script>
+    <% include partials/js %>
 
 </body>
 

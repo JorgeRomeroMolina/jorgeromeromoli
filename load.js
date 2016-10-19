@@ -15,8 +15,20 @@ app.get('/', function (req, res) {
 });
 
 
+app.get('/docs/mongodbapi/index', function (req, res) {
+  res.render('docs/mongodbapi/index');
+});
+
 app.get('/docs/mongodbapi/insert', function (req, res) {
   res.render('docs/mongodbapi/insert');
+});
+
+app.get('/docs/mongodbapi/read', function (req, res) {
+  res.render('docs/mongodbapi/read');
+});
+
+app.get('/docs/mongodbapi/update', function (req, res) {
+  res.render('docs/mongodbapi/update');
 });
 
 app.get('/docs/mongodbapi/delete', function (req, res) {

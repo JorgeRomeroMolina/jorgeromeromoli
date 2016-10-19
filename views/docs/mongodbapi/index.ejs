@@ -3,23 +3,10 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="jorgeromeromoli">
+    
+    <% include partials/metas %>
 
-    <title>MONGOAPI</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/sb-admin.css" rel="stylesheet">
-    <link href="css/prism.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <% include partials/themes %>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,45 +21,7 @@
 
     <div id="wrapper">
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">MONGOAPI</a>
-            </div>
-
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                	<li class="active">
-                        <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Index</a>
-                    </li>
-                    <li>
-                        <a href="javascript:;"><i class="fa fa-fw fa-file"></i> mongocrudAsync </a>
-                        <ul>
-                            <li>
-                                <a href="#">insert</a>
-                            </li>
-                            <li>
-                                <a href="#">read</a>
-                            </li>
-                            <li>
-                                <a href="#">update</a>
-                            </li>
-                            <li>
-                                <a href="#">delete</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </nav>
+        <% include partials/navigation %>
 
         <div id="page-wrapper">
 
@@ -83,11 +32,11 @@
                     <div class="col-lg-12">
                         <h1 class="page-header">
                             MONGODBAPI
-                            <small>1.0.5</small>
+                            <small>1.0.7</small>
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-file"></i> Index
+                                <i class="fa fa-file"></i> MONGODBAPI > Index
                             </li>
                         </ol>
                     </div>
@@ -96,7 +45,7 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-                        Mongodbapi is a <a href="https://www.mongodb.org/" target="_black">MongoDB</a> object modeling tool designed to work in asynchronous environments.
+                        Mongodbapi is a <a href="https://www.mongodb.org/" target="_black">MongoDB</a> interface designed to create CRUD operations (create, read, update and delete <a href="https://docs.mongodb.com/manual/core/document/#bson-document-format" target="_black">documents</a>).
                     </div>
                 </div>
 
@@ -117,7 +66,11 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h2>Installation</h2>
-                        $ npm install mongodbapi
+                        <pre>
+                            <code class="languageGit-git">
+$ npm install mongodbapi
+                            </code>
+                        </pre>
                     </div>
                 </div>
 
@@ -125,18 +78,19 @@
                     <div class="col-lg-12">
                         <div>
                             <h2>Overview</h2>
-                            You can create crud methods by means of promises:
+                            Managing docs with mongodbapi is very easy, you just need to create  a mongo object, passing a conexion string, and then executing a CRUD operator:
                         </div>
 
                         <div>
                             <pre>
                                 <code class="language-JavaScript">
-let mongoapi = require('mongocrudAsync');
-const connection = 'mongodb://127.0.0.1:27017/local';
-const collectionName = 'test_crudAsync';
+let mongoapi = require('mongodbapi');
 
+const connection = 'mongodb://127.0.0.1:27017/local';
 let mongo = new mongoapi(connection);
-mongo.read( { collection: collectionName } ).then( (result) => {
+
+let command = { collection: 'test' };
+mongo.read(command).then( (result) => {
 
     console.log(result);
 
@@ -155,36 +109,40 @@ mongo.read( { collection: collectionName } ).then( (result) => {
                 <div class="row">
                     <div class="col-lg-12">
                         <h2>Index</h2>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>mongocrudAsync</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <ul>
-                                            <li>
-                                                <a href="https://nodejs.org/en/">insert</a>
-                                            </li>
-                                            <li>
-                                                <a href="https://www.mongodb.com/">read</a>
-                                            </li>
-                                            <li>
-                                                <a href="https://www.mongodb.com/">update</a>
-                                            </li>
-                                            <li>
-                                                <a href="https://www.mongodb.com/">delete</a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
+                        mongodbapi support the following operators:
+                        <ul>
+                            <li>
+                                <a href="insert">insert</a>
+                            </li>
+                            <li>
+                                <a href="read">read</a>
+                            </li>
+                            <li>
+                                <a href="update">update</a>
+                            </li>
+                            <li>
+                                <a href="delete">delete</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Related links</h2>
+                        <ul>
+                            <li>
+                                <a href="https://docs.mongodb.com/manual/crud/" target="black">MongoDb manual: CRUD</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row"><div class="col-lg-12"><p></p></div></div>
+                <div class="row"><div class="col-lg-12"><p></p></div></div>
+                <div class="row"><div class="col-lg-12"><p></p></div></div>
+                <div class="row"><div class="col-lg-12"><p></p></div></div>
+                <div class="row"><div class="col-lg-12"><p></p></div></div>
 
             </div>
             <!-- /.container-fluid -->
@@ -195,13 +153,7 @@ mongo.read( { collection: collectionName } ).then( (result) => {
     </div>
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-    <script src="js/prism.js"></script>
+    <% include partials/js %>
 
 </body>
 

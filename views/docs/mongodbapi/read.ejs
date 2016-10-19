@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <% include partials/metas %>
+
+    <% include partials/themes %>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <% include partials/navigation %>
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            READ
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                <i class="fa fa-file"></i> MONGODBAPI > <b>read</b>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Description</h2>
+                        To get documents from a collection. The following example gets all documents in the collection 'test':
+                    </div>
+                        <div>
+                            <pre>
+                                <code class="language-JavaScript">
+let mongoapi = require('mongodbapi');
+
+const connection = 'mongodb://127.0.0.1:27017/local';
+
+let mongo = new mongoapi(connection);
+let params = { collection: 'test' };
+mongo.read(params).then( (result) => {
+
+    console.log(result);
+
+}, (err) => {
+
+    console.log(err);
+
+} );
+                                </code>
+                            </pre>
+                        </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Parameters</h2>
+                        The <b>read</b> method require a parameter of type object with the following properties:
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                	<th>Name</th>
+                                	<th>Type</th>
+                                	<th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        collection
+                                    </td>
+                                    <td>
+                                        text
+                                    </td>
+                                    <td>
+                                    	Name of the collection
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        filter
+                                    </td>
+                                    <td>
+                                        object 
+                                    </td>
+                                    <td>
+                                        <p>
+                                    	<b>[option]</b>. To specify the conditions that determine which records to select
+                                        </p>
+                                        <p>
+                                        More information about filters: <a href="https://docs.mongodb.com/manual/core/document/#document-query-filter" target="black">mongoDb filters</a>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        projection
+                                    </td>
+                                    <td>
+                                        object
+                                    </td>
+                                    <td>
+                                        <p>
+                                        <b>[optional]</b>. To limits the fields to return.
+                                        </p>
+                                        <p>
+                                        More information about projections: <a href="https://docs.mongodb.com/manual/tutorial/project-fields-from-query-results/" target="black">mongoDb projects fields</a>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        modifier
+                                    </td>
+                                    <td>
+                                        object
+                                    </td>
+                                    <td>
+                                        <p>
+                                        <b>[optional]</b>. To modify the output or behavior of a query.
+                                        </p>
+                                        <p>
+                                        More information about modifiers: <a href="https://docs.mongodb.com/manual/reference/operator/query-modifier/" target="black">mongoDb projects fields</a>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div>
+                            Example of parameter:
+                        </div>
+                        <div>
+                            <pre>
+                            <code class="language-JavaScript">
+let params = { 
+    collection: 'clients', 
+    filter: { name: 'George' },
+    projection: { _id: 0, name: 1, surname: 1 },
+    modifier: { sort: { name: -1 } }
+};
+                            </code>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div>
+                            <h2>Response</h2>
+                            The method returns an array with the matches documents: 
+                        </div>
+                        <div>
+                            <pre>
+                                <code class="language-JavaScript">
+let params = { 
+    collection: 'clients', 
+    filter: { name: 'George' },
+    projection: { _id: 0, name: 1, surname: 1 },
+    modifier: { sort: { name: -1 } }
+};
+mongo.read(params).then( (result) => {
+    console.log(result);
+});
+                                </code>
+                            </pre>
+                            <pre>
+                                <code class="languageGit-git">
+>  [{ name: 'George', surname: 'Abrahams' },
+    { name: 'George', surname: 'Bullock' },
+    { name: 'George', surname: 'Fleming' },
+    { name: 'George', surname: 'Harrelson' },
+    { name: 'George', surname: 'Hawkins' }]
+                                </code>
+                            </pre>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div>
+                            <h2>Errors</h2>
+                            The method can returns a error object with the following properties:
+                            <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        status
+                                    </td>
+                                    <td>
+                                        boolean
+                                    </td>
+                                    <td>
+                                        The value will be <b>false</b> so means an error was found
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        code
+                                    </td>
+                                    <td>
+                                        string
+                                    </td>
+                                    <td>
+                                        <p>String whith the following format: <font color="red">err_mongodbapi_<b>xxx</b></font></p>
+                                        <p><font color="red"><b>xxx</b></font> represents an internal control number</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        message
+                                    </td>
+                                    <td>
+                                        string 
+                                    </td>
+                                    <td>
+                                        Error message created by mongodbapi
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        messageMongo
+                                    </td>
+                                    <td>
+                                        string 
+                                    </td>
+                                    <td>
+                                        Error message from mongodb
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        trace
+                                    </td>
+                                    <td>
+                                        string 
+                                    </td>
+                                    <td>
+                                        Trace error
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table> 
+                        </div>
+                        <div>
+                            <pre>
+                                <code class="language-JavaScript">
+let mongoapi = require('mongodbapi');
+
+const connection = 'mongodb://bad connection';
+let mongo = new mongoapi(connection);
+let params = { 
+    collection: 'clients', 
+    filter: { name: 'George' },
+    projection: { _id: 0, name: 1, surname: 1 },
+    modifier: { sort: { name: -1 } }
+};
+
+mongo.read(params).then( (result) => {
+
+    console.log(result);
+
+}, (err) => {
+
+    console.log(err);
+
+} );
+                                </code>
+                            </pre>
+                            <pre>
+                                <code class="languageGit-git">
+> { [Error: Database connection failed]
+  status: false,
+  code: 'err_mongodbapi_000',
+  message: 'Database connection failed',
+  messageMongo: [Error: invalid port (larger than 65535) with hostname],
+  trace: 'Error: Database connection failed\n    at err_mongodbapi_000 (C:\\projects\\node\\mongodbapi\\lib\\basecrud.js:243:12)\n    at C:\\projects\\node\\mongodbapi\\lib\\basecrud.js:122:15\n    at runMicrotasksCallback (node.js:327:7)\n    at nextTickCallbackWith0Args (node.js:420:9)\n    at process._tickCallback (node.js:349:13)' }
+                                </code>
+                            </pre>
+                        </div>
+                        <div>
+                            <p></p>
+                            The insert method can return the following errors:
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Message</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <font color="red">err_mongodbapi_000</font>
+                                        </td>
+                                        <td>
+                                            Database connection failed
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <font color="red">err_mongodbapi_002</font>
+                                        </td>
+                                        <td>
+                                            Query object was not created correctly: collection field is mandatory
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <font color="red">err_mongodbapi_003</font>
+                                        </td>
+                                        <td>
+                                            There was error executing the query
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Related links</h2>
+                        <ul>
+                            <li>
+                                <a href="https://docs.mongodb.com/manual/tutorial/query-documents/" target="black">MongoDb manual: Query Documents</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row"><div class="col-lg-12"><p></p></div></div>
+                <div class="row"><div class="col-lg-12"><p></p></div></div>
+                <div class="row"><div class="col-lg-12"><p></p></div></div>
+                <div class="row"><div class="col-lg-12"><p></p></div></div>
+                <div class="row"><div class="col-lg-12"><p></p></div></div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <% include partials/js %>
+
+</body>
+
+</html>
